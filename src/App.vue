@@ -1,6 +1,7 @@
 <template>
   <h1>Vue3 标准模版</h1>
   <p>ts + vue-router + vuex + test</p>
+  <a-button type="primary">Primary</a-button>
 </template>
 
 <style lang="stylus">
