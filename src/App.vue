@@ -1,15 +1,25 @@
 <template>
-  <h1>Vue3 标准模版</h1>
-  <p>ts + vue-router + vuex + test</p>
-  <a-button type="primary">Primary</a-button>
+  <template-detail />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Home from './views/Home.vue'
+import Editor from './views/Editor.vue'
+import TemplateDetail from './views/TemplateDetail.vue'
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    TemplateDetail
+  }
+})
+</script>
 
 <style lang="stylus">
 #app
   font-family Avenir, Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  text-align center
   color #2c3e50
-  margin-top 60px
 </style>
