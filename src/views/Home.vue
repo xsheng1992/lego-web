@@ -1,18 +1,6 @@
 <template>
   <div class="homepage-container">
-    <a-layout class="home-layout">
-      <a-layout-header class="header">
-        <div class="page-title">网页乐高</div>
-      </a-layout-header>
-      <a-layout-content class="home-content">
-        <div class="content-container">
-          <template-list :list="list" />
-        </div>
-      </a-layout-content>
-    </a-layout>
-    <a-layout-footer>
-      footer
-    </a-layout-footer>
+    <template-list :list="list" />
   </div>
 </template>
 
@@ -44,12 +32,3 @@ export default defineComponent({
   },
 })
 </script>
-
-
-<style lang="stylus" scoped>
-.home-layout
-  background-color #fff
-  .page-title
-    color #fff
-    text-align left
-</style>
