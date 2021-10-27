@@ -1,11 +1,13 @@
 <template>
   <div class="homepage-container">
-    <template-list :list="list" />
+    <template-list :list="testData" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '../store' 
 import TemplateList from '../components/TemplateList.vue'
 
 export default defineComponent({
@@ -14,21 +16,22 @@ export default defineComponent({
     TemplateList
   },
   setup() {
-    const list = ref([
-      {
-        id: 1,
-        title: '示例模版1',
-        description: '这是一个示例的模版',
-        author: 'xiangsheng',
-        copiedCount: 5,
-        isHot: true,
-        isNew: true
-      }
-    ])
+    const store = useStore<GlobalDataProps>()
+    const testData = computed(() => store.state.templates.data)
 
     return {
-      list
+      testData
     }
   },
 })
 </script>
+
+<style lang="stylus" scoped>
+.homepage-container
+  background-color #fff
+  padding 0 24px 24px 30px
+  min-height 85vh
+  max-width 1200px
+  margin 50px auto
+  width 100%
+</style>
