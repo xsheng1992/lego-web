@@ -1,4 +1,4 @@
-import { Module } from "vuex"
+import { Module } from 'vuex'
 import { GlobalDataProps } from './index'
 
 export interface TemplateProps {
