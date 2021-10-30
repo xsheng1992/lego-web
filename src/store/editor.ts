@@ -38,6 +38,10 @@ const editor: Module<EditorProps, GlobalDataProps> = {
         props
       }
       state.components.push(newComponent)
+    },
+    removeComponentById: (state, id: string) => {
+      const newComponents = state.components.filter(comp => comp.id !== id)
+      state.components = [...newComponents]
     }
   }
 }

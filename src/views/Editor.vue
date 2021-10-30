@@ -18,12 +18,15 @@
             <a-layout-content class="preview-container">
               <p>画布区域</p>
               <div class="preview-list" id="canvas-area">
-                <component
+                <div class="item-wrapper"
                   v-for="component in components"
-                  :key="component.id"
-                  :is="component.name"
-                  v-bind="component.props"
-                />
+                  :key="component.id">
+                  <component
+                    :is="component.name"
+                    v-bind="component.props"
+                  />
+                  <span @click="removeItemById(component.id)">X</span>
+                </div>
               </div>
             </a-layout-content>
           </a-layout>
@@ -46,6 +49,7 @@ import { GlobalDataProps } from '../store'
 import ComponentsList from '../components/ComponentsList.vue'
 import LText from '../components/LText.vue'
 import { defaultTextTemplates } from '../defaultTemplates'
+import { TextDefaultProps } from '../defaultProps'
 
 export default defineComponent({
   name: 'Editor',
@@ -57,14 +61,19 @@ export default defineComponent({
     const store = useStore<GlobalDataProps>()
     const components = computed(() => store.state.editor.components)
 
-    const addItem = (props: any) => {
+    const addItem = (props: Partial<TextDefaultProps>) => {
       store.commit('addComponent', props)
+    }
+
+    const removeItemById = (id: string) => {
+      store.commit('removeComponentById', id)
     }
 
     return {
       components,
       defaultTextTemplates,
-      addItem
+      addItem,
+      removeItemById
     }
   },
 })
