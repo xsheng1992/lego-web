@@ -46,15 +46,15 @@ export default defineComponent({
 .poster-item
   position relative
   margin-bottom 20px
-  >>> .ant-card
+  :deep(.ant-card)
     border-radius 12px
-  >>> .ant-card-hoverable
+  :deep(.ant-card-hoverable)
     box-shadow 0px 5px 10px 0px rgba(0, 0, 0, 0.1)
-  >>> .ant-card-body
+  :deep(.ant-card-body)
     padding 0
-  >>> .ant-car-meta
+  :deep(.ant-car-meta)
     margin 0
-  >>> .ant-card-meta-title
+  :deep(.ant-card-meta-title)
     color #333
     padding 10px 12px
     border-bottom 1px solid #f2f2f2
@@ -70,7 +70,7 @@ export default defineComponent({
     height 70px
     h2
       margin-bottom 0
-  >>> .ant-card-cover
+  :deep(.ant-card-cover)
     height 390px
     position relative
     overflow hidden
