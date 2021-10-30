@@ -17,9 +17,12 @@
             <a-layout-content class="preview-container">
               <p>画布区域</p>
               <div class="preview-list" id="canvas-area">
-                <div v-for="component in components" :key="component.id">
-                  {{ component.props.text }}
-                </div>
+                <component
+                  v-for="component in components"
+                  :key="component.id"
+                  :is="component.name"
+                  v-bind="component.props"
+                />
               </div>
             </a-layout-content>
           </a-layout>
@@ -39,9 +42,13 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '../store'
+import LText from '../components/LText.vue'
 
 export default defineComponent({
   name: 'Editor',
+  components: {
+    LText
+  },
   setup () {
     const store = useStore<GlobalDataProps>()
     const components = computed(() => store.state.editor.components)
