@@ -18,20 +18,26 @@
             <a-layout-content class="preview-container">
               <p>画布区域</p>
               <div class="preview-list" id="canvas-area">
-                <div class="item-wrapper"
+                <editor-wrapper
                   v-for="component in components"
-                  :key="component.id">
+                  :key="component.id"
+                  :id="component.id"
+                  :active="currentElement && (currentElement.id === component.id)"
+                  @set-active="setActive">
                   <component
                     :is="component.name"
                     v-bind="component.props"
                   />
                   <span @click="removeItemById(component.id)">X</span>
-                </div>
+                </editor-wrapper>
               </div>
             </a-layout-content>
           </a-layout>
-          <a-layout-sider width="300" style="background: purple" class="settings-panel">
+          <a-layout-sider width="300" style="background: white" class="settings-panel">
             组件属性
+            <pre>
+              {{ currentElement && currentElement.props }}
+            </pre>
           </a-layout-sider>
         </a-layout>
       </a-layout-content>
@@ -46,7 +52,9 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '../store'
+import { ComponentData } from '../store/editor'
 import ComponentsList from '../components/ComponentsList.vue'
+import EditorWrapper from '../components/EditorWrapper.vue'
 import LText from '../components/LText.vue'
 import { defaultTextTemplates } from '../defaultTemplates'
 import { TextDefaultProps } from '../defaultProps'
@@ -55,11 +63,13 @@ export default defineComponent({
   name: 'Editor',
   components: {
     LText,
-    ComponentsList
+    ComponentsList,
+    EditorWrapper
   },
   setup () {
     const store = useStore<GlobalDataProps>()
     const components = computed(() => store.state.editor.components)
+    const currentElement = computed<ComponentData | null>(() => store.getters.getCurrentElement)
 
     const addItem = (props: Partial<TextDefaultProps>) => {
       store.commit('addComponent', props)
@@ -69,11 +79,17 @@ export default defineComponent({
       store.commit('removeComponentById', id)
     }
 
+    const setActive = (id: string) => {
+      store.commit('setActive', id)
+    }
+
     return {
       components,
       defaultTextTemplates,
+      currentElement,
       addItem,
-      removeItemById
+      removeItemById,
+      setActive
     }
   },
 })

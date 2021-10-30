@@ -22,13 +22,18 @@ export interface EditorProps {
 export const testComponents: ComponentData[] = [
   { id: uuidv4(), name: 'l-text', props: { text: 'hello', fontSize: '20px', color: 'red' } },
   { id: uuidv4(), name: 'l-text', props: { text: 'hello2', fontSize: '10px', fontWeight: 'bold' } },
-  { id: uuidv4(), name: 'l-text', props: { text: 'hello3', fontSize: '15px', actionType: 'url', url: 'http://www.baidu.com' } }
+  { id: uuidv4(), name: 'l-text', props: { text: 'hello3', fontSize: '15px' } }
 ]
 
 const editor: Module<EditorProps, GlobalDataProps> = {
   state: {
     components: testComponents,
     currentElement: ''
+  },
+  getters: {
+    getCurrentElement: (state) => {
+      return state.components.find(item => item.id === state.currentElement)
+    }
   },
   mutations: {
     addComponent: (state, props: Partial<TextDefaultProps>) => {
@@ -42,6 +47,9 @@ const editor: Module<EditorProps, GlobalDataProps> = {
     removeComponentById: (state, id: string) => {
       const newComponents = state.components.filter(comp => comp.id !== id)
       state.components = [...newComponents]
+    },
+    setActive: (state, currentId: string) => {
+      state.currentElement = currentId
     }
   }
 }

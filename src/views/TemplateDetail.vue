@@ -57,7 +57,7 @@ export default defineComponent({
     width 100%
 .use-buttom
   margin 30px 0
->>> .ant-avatar
+:deep(.ant-avatar)
   margin-right 10px
 .bar-code-area
   margin 20px 0
