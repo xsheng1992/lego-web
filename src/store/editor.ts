@@ -5,7 +5,7 @@ import { TextDefaultProps } from '../defaultProps'
 
 export interface ComponentData {
   // 当前元素的属性
-  props: { [key: string]: any }
+  props: Partial<TextDefaultProps>
   // 当前元素的id， uuid v4生成
   id: string
   // 业务组件名称 l-text l-image 等
@@ -50,6 +50,10 @@ const editor: Module<EditorProps, GlobalDataProps> = {
     },
     setActive: (state, currentId: string) => {
       state.currentElement = currentId
+    },
+    updateComponent: (state, { key, value }) => {
+      const updateComponent = state.components.find(item => item.id === state.currentElement)
+      updateComponent && (updateComponent.props[key as keyof TextDefaultProps] = value)
     }
   }
 }
