@@ -58,7 +58,7 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 .user-profile-component
-  border-radius 2px!important
+  border-radius 20px
 .user-operation > *
   margin-left 30px!important
 </style>

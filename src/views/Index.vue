@@ -2,7 +2,9 @@
   <a-layout class="main-layout">
     <a-layout-header class="header">
       <div class="page-title">
-        <router-link to="/">网页乐高</router-link>
+        <router-link to="/">
+          <img :src="require('../assets/images/logo2.png')">
+        </router-link>
       </div>
       <user-profile :user="userData" />
     </a-layout-header>
@@ -45,6 +47,7 @@ export default defineComponent({
     display flex
     align-items center
     justify-content space-between
+    background-color rgba(#000, .5)
   .page-title
     color #fff
 </style>
