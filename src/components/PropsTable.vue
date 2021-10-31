@@ -5,7 +5,10 @@
       :key="key"
       class="prop-item"
     >
-      <component v-if="value" :is="value.component" :value="value.value" />
+      <span class="label" v-if="value.text">{{ value.text }}</span>
+      <div class="prop-component">
+        <component :is="value.component" :value="value.value" v-bind="value.extraProps" />
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +19,7 @@ import { reduce } from 'lodash-es'
 import { PropToForms, mapPropsToForms } from '../propsMap'
 import { TextDefaultProps } from '../defaultProps'
 
-export default defineComponent({
+export default defineComponent({ 
   name: 'PropsTable',
   props: {
     props: {
@@ -34,7 +37,7 @@ export default defineComponent({
           result[newKey] = item
         }
         return result
-      }, {} as PropToForms)
+      }, {} as Required<PropToForms>)
     })
 
     return {
@@ -44,3 +47,13 @@ export default defineComponent({
 })
 </script>
 
+<style lang="stylus" scoped>
+.prop-item
+  display flex
+  margin-bottom 10px
+  align-items center
+.label
+  width 28%
+.prop-component
+  width 70%
+</style>
