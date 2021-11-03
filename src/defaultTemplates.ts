@@ -11,7 +11,8 @@ export const defaultTextTemplates = [
   },
   {
     text: '链接内容',
-    fontSize: '#1890ff',
+    fontSize: '14px',
+    color: '#1890ff',
     fontWeight: 'underline',
     tag: 'p'
   },

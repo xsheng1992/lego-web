@@ -1,6 +1,7 @@
 <template>
   <div class="editor-wrapper" :class="{ active }" @click="onItemClick(id)">
     <slot></slot>
+    <span class="delete-btn" @click="clickRemove(id)">X</span>
   </div>
 </template>
 
@@ -19,13 +20,18 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['set-active'],
+  emits: ['set-active', 'remove-item'],
   setup (props, context) {
     const onItemClick = (id: string) => {
       context.emit('set-active', id)
     }
+
+    const clickRemove = (id: string) => {
+      context.emit('remove-item', id)
+    }
     return {
-      onItemClick
+      onItemClick,
+      clickRemove
     }
   }
 })
@@ -37,10 +43,16 @@ export default defineComponent({
   cursor pointer
   border 1px solid transparent
   user-select none
+  position relative
   &:hover
     border 1px dashed #ccc
   &.active
     border 1px solid #1890ff
     user-select none
     z-index 1500
+  .delete-btn
+    position absolute
+    right 10px
+    top 50%
+    transform translateY(-50%)
 </style>

@@ -18,6 +18,10 @@ export default defineComponent({
       type: String,
       default: 'div'
     },
+    isEditor: {
+      type: Boolean,
+      default: false
+    },
     ...defaultProps
   },
   setup (props) {

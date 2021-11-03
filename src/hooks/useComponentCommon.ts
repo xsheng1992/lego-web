@@ -3,10 +3,14 @@ import { computed } from 'vue'
 import { pick } from 'lodash-es'
 import { TextDefaultProps } from '../defaultProps'
 
-const useComponentCommon = (props: Readonly<Partial<TextDefaultProps>>, picks: string[]) => {
+interface EditorTextDefaultProps extends TextDefaultProps {
+  isEditor: boolean
+}
+
+const useComponentCommon = (props: Readonly<Partial<EditorTextDefaultProps>>, picks: string[]) => {
   const styleProps = computed(() => pick(props, picks))
   const handleClick = () => {
-    if (props.actionType === 'url' && props.url) {
+    if (!props.isEditor && props.actionType === 'url' && props.url) {
       window.location.href = props.url
     }
   }

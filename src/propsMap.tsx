@@ -1,4 +1,4 @@
-import { VNode, h } from 'vue'
+import { VNode } from 'vue'
 import { TextDefaultProps } from './defaultProps'
 
 export interface PropToForm {
@@ -70,5 +70,12 @@ export const mapPropsToForms: PropToForms = {
       { text: '无', value: '' },
       ...fontFamilyOptions
     ]
+  },
+  opacity: {
+    text: '透明度',
+    component: 'a-slider',
+    extraProps: { min: 0, max: 100, reverse: true },
+    initalTransform: (v: string) => parseFloat(v) * 100,
+    afterTransform: (e: any) => (e / 100).toString()
   }
 }

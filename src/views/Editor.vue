@@ -23,12 +23,13 @@
                   :key="component.id"
                   :id="component.id"
                   :active="currentElement && (currentElement.id === component.id)"
-                  @set-active="setActive">
+                  @set-active="setActive"
+                  @remove-item="removeItemById">
                   <component
                     :is="component.name"
+                    :isEditor="true"
                     v-bind="component.props"
                   />
-                  <span @click="removeItemById(component.id)">X</span>
                 </editor-wrapper>
               </div>
             </a-layout-content>
