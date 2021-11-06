@@ -3,11 +3,13 @@
     <div
       v-for="(value, key) in finalProps"
       :key="key"
-      class="prop-item"
+      :class="`prop-item${value.text ? '' : ' no-text'}`"
+      :id="`item-${key}`"
     >
       <span class="label" v-if="value.text">{{ value.text }}</span>
-      <div class="prop-component">
+      <div :class="`prop-component component-${value.component}`">
         <component
+          class="prop-component-item"
           :is="value.component"
           :[value.valueProp]="value.value"
           v-bind="value.extraProps"
@@ -33,6 +35,9 @@ import { reduce } from 'lodash-es'
 import { mapPropsToForms } from '../propsMap'
 import { TextDefaultProps } from '../defaultProps'
 import RenderVnode from './RenderVnode'
+import IconSwitch from './IconSwitch.vue'
+import ShadowPicker from './ShadowPicker.vue'
+import ColorPicker from './ColorPicker.vue'
 
 interface FormProps {
   component: string
@@ -55,7 +60,10 @@ export default defineComponent({
     }
   },
   components: {
-    RenderVnode
+    RenderVnode,
+    IconSwitch,
+    ShadowPicker,
+    ColorPicker
   },
   emits: ['change'],
   setup (props, context) {
@@ -95,8 +103,19 @@ export default defineComponent({
   display flex
   margin-bottom 10px
   align-items center
+  &.no-text
+    display inline-block
+    margin 0 10px 0 0
 .label
   width 28%
 .prop-component
   width 70%
+.prop-component-item
+  width 100%
+#item-fontWeight
+  margin-left 28%
+#item-boxShadow
+  width 100%
+.component-shadow-picker
+  width 100%
 </style>

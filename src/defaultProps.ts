@@ -31,7 +31,7 @@ export const commonDefaultProps: CommonDefaultProps = {
   actionType: '',
   url: '',
   // size
-  height: '',
+  height: '36px',
   width: '318px',
   paddingLeft: '0px',
   paddingRight: '0px',
