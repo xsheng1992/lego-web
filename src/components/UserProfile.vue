@@ -12,7 +12,7 @@
         <a-menu class="user-profile-dropdown">
           <a-menu-item key="0">创建作品</a-menu-item>
           <a-menu-item key="1">我的作品</a-menu-item>
-          <a-menu-item key="2" @click="logout">登出</a-menu-item>
+          <a-menu-item class="logout" key="2" @click="logout">登出</a-menu-item>
         </a-menu>
       </template>
     </a-dropdown-button>
