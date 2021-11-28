@@ -1,7 +1,7 @@
 <template>
   <div class="editor-wrapper" :class="{ active }" @click="onItemClick(id)">
     <slot></slot>
-    <span class="delete-btn" @click="clickRemove(id)">X</span>
+    <span class="delete-btn" v-if="active" @click="clickRemove(id)">X</span>
   </div>
 </template>
 

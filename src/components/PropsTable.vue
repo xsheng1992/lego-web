@@ -38,6 +38,7 @@ import RenderVnode from './RenderVnode'
 import IconSwitch from './IconSwitch.vue'
 import ShadowPicker from './ShadowPicker.vue'
 import ColorPicker from './ColorPicker.vue'
+import ImageProcesser from './ImageProcesser.vue'
 
 interface FormProps {
   component: string
@@ -63,7 +64,8 @@ export default defineComponent({
     RenderVnode,
     IconSwitch,
     ShadowPicker,
-    ColorPicker
+    ColorPicker,
+    ImageProcesser
   },
   emits: ['change'],
   setup (props, context) {
@@ -114,8 +116,10 @@ export default defineComponent({
   width 100%
 #item-fontWeight
   margin-left 28%
-#item-boxShadow
+#item-boxShadow,
+#item-imageSrc
   width 100%
-.component-shadow-picker
+.component-shadow-picker,
+.component-image-processer
   width 100%
 </style>

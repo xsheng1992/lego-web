@@ -32,7 +32,7 @@ export const commonDefaultProps: CommonDefaultProps = {
   url: '',
   // size
   height: '36px',
-  width: '318px',
+  width: '373px',
   paddingLeft: '0px',
   paddingRight: '0px',
   paddingTop: '0px',
@@ -65,6 +65,10 @@ export interface TextDefaultProps extends CommonDefaultProps {
   backgroundColor: string
 }
 
+export interface ImageDefaultProps extends CommonDefaultProps {
+  imageSrc: string;
+}
+
 export const textDefaultProps: TextDefaultProps = {
   text: '正文内容',
   fontSize: '14px',
@@ -78,13 +82,21 @@ export const textDefaultProps: TextDefaultProps = {
   backgroundColor: '',
   ...commonDefaultProps
 }
+export const imageDefaultProps: ImageDefaultProps = {
+  imageSrc: 'test.url',
+  ...commonDefaultProps,
+  height: ''
+}
+export type AllComponentProps = TextDefaultProps & ImageDefaultProps
+type AllComponentType = TextDefaultProps | ImageDefaultProps
 
 export const textStylePropNames = without(Object.keys(textDefaultProps), 'acitionType', 'url', 'text')
+export const imageStylePropsNames = without(Object.keys(imageDefaultProps), 'src')
 
-export const transformToComponentProps = (props: TextDefaultProps) => {
+export const transformToComponentProps = <T extends AllComponentType>(props: T) => {
   return mapValues(props, item => {
     return {
-      type: item.constructor as StringConstructor,
+      type: (item as any).constructor as StringConstructor,
       default: item
     }
   })

@@ -1,5 +1,5 @@
 import { VNode } from 'vue'
-import { TextDefaultProps } from './defaultProps'
+import { AllComponentProps } from './defaultProps'
 
 export interface PropToForm {
   component: string
@@ -14,7 +14,7 @@ export interface PropToForm {
 }
 
 export type PropToForms = {
-  [P in keyof TextDefaultProps]?: PropToForm
+  [P in keyof AllComponentProps]?: PropToForm
 }
 
 const fontFamilyArray = [
@@ -41,8 +41,14 @@ const defaultHandler: PropToForm = {
 
 const pxToNumberHandler: PropToForm = {
   component: 'a-input-number',
-  initalTransform: (v: string) => parseInt(v),
-  afterTransform: (e: any) => e ? `${e}px` : '0'
+  initalTransform: (v: string) => {
+    if (v === '') return ''
+    return parseInt(v)
+  },
+  afterTransform: (e: any) => {
+    if (e === 0) return '0'
+    return e ? `${e}px` : ''
+  }
 }
 
 export const mapPropsToForms: PropToForms = {
@@ -193,5 +199,10 @@ export const mapPropsToForms: PropToForms = {
   backgroundColor: {
     text: '背景颜色',
     component: 'color-picker'
+  },
+  // 图片属性
+  imageSrc: {
+    component: 'image-processer',
+    valueProp: 'src'
   }
 }

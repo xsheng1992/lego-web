@@ -1,11 +1,11 @@
 import { Module } from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
 import { GlobalDataProps } from './index'
-import { TextDefaultProps, textDefaultProps } from '../defaultProps'
+import { AllComponentProps, TextDefaultProps, textDefaultProps } from '../defaultProps'
 
 export interface ComponentData {
   // 当前元素的属性
-  props: Partial<TextDefaultProps>
+  props: Partial<AllComponentProps>
   // 当前元素的id， uuid v4生成
   id: string
   // 业务组件名称 l-text l-image 等
@@ -37,13 +37,8 @@ const editor: Module<EditorProps, GlobalDataProps> = {
     }
   },
   mutations: {
-    addComponent: (state, props: Partial<TextDefaultProps>) => {
-      const newComponent: ComponentData = {
-        id: uuidv4(),
-        name: 'l-text',
-        props
-      }
-      state.components.push(newComponent)
+    addComponent: (state, component: ComponentData) => {
+      state.components.push(component)
     },
     removeComponentById: (state, id: string) => {
       const newComponents = state.components.filter(comp => comp.id !== id)

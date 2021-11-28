@@ -59,14 +59,15 @@ import { ComponentData } from '../store/editor'
 import ComponentsList from '../components/ComponentsList.vue'
 import EditorWrapper from '../components/EditorWrapper.vue'
 import LText from '../components/LText.vue'
+import LImage from '../components/LImage.vue'
 import PropsTable from '../components/PropsTable.vue'
 import { defaultTextTemplates } from '../defaultTemplates'
-import { TextDefaultProps } from '../defaultProps'
 
 export default defineComponent({
   name: 'Editor',
   components: {
     LText,
+    LImage,
     ComponentsList,
     EditorWrapper,
     PropsTable
@@ -76,8 +77,8 @@ export default defineComponent({
     const components = computed(() => store.state.editor.components)
     const currentElement = computed<ComponentData | null>(() => store.getters.getCurrentElement)
 
-    const addItem = (props: Partial<TextDefaultProps>) => {
-      store.commit('addComponent', props)
+    const addItem = (component: ComponentData) => {
+      store.commit('addComponent', component)
     }
 
     const removeItemById = (id: string) => {
